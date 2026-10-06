@@ -1,0 +1,3 @@
+# Kyo Website
+
+The official website for Kyo, a Discord bot, I guess so...

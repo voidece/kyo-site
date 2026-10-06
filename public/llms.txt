@@ -1,0 +1,14 @@
+# Kyo
+
+> Kyo is a Discord music bot that streams music from YouTube, Spotify, and SoundCloud with fast playback and clear audio.
+
+## Pages
+
+- [Home](https://kyobot.voidev.in/): Overview of Kyo, its features, and how to add it to a Discord server.
+- [Commands](https://kyobot.voidev.in/commands): Full list of Kyo's commands for playing music, managing queues, and more.
+- [Status](https://kyobot.voidev.in/status): Real-time bot status, latency, and uptime.
+
+## Optional
+
+- [Privacy Policy](https://kyobot.voidev.in/privacy): How Kyo handles user data.
+- [Terms of Service](https://kyobot.voidev.in/terms): Terms and conditions for using Kyo.

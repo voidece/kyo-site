@@ -1,0 +1,295 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant hover {
+	@media (any-hover: hover) {
+		&:hover {
+			@slot;
+		}
+	}
+}
+
+@custom-variant data-open {
+	&:where([data-state="open"]),
+	&:where([data-open]:not([data-open="false"])) {
+		@slot;
+	}
+}
+@custom-variant data-closed {
+	&:where([data-state="closed"]),
+	&:where([data-closed]:not([data-closed="false"])) {
+		@slot;
+	}
+}
+@custom-variant data-active {
+	&:where([data-state="active"]),
+	&:where([data-active]:not([data-active="false"])) {
+		@slot;
+	}
+}
+@custom-variant data-horizontal {
+	&:where([data-orientation="horizontal"]) {
+		@slot;
+	}
+}
+@custom-variant data-vertical {
+	&:where([data-orientation="vertical"]) {
+		@slot;
+	}
+}
+
+@theme inline {
+	--font-sans: var(--font-sofia), var(--font-inter), sans-serif;
+	--font-heading: var(--font-sans);
+
+	--color-border: var(--border);
+	--color-input: var(--input);
+	--color-ring: var(--ring);
+	--color-background: var(--background);
+	--color-foreground: var(--foreground);
+	--color-primary: var(--primary);
+	--color-primary-foreground: var(--primary-foreground);
+	--color-secondary: var(--secondary);
+	--color-secondary-foreground: var(--secondary-foreground);
+	--color-destructive: var(--destructive);
+	--color-destructive-foreground: var(--destructive-foreground);
+	--color-muted: var(--muted);
+	--color-muted-foreground: var(--muted-foreground);
+	--color-accent: var(--accent);
+	--color-accent-foreground: var(--accent-foreground);
+	--color-popover: var(--popover);
+	--color-popover-foreground: var(--popover-foreground);
+	--color-card: var(--card);
+	--color-card-foreground: var(--card-foreground);
+
+	--radius-lg: var(--radius);
+	--radius-md: calc(var(--radius) - 2px);
+	--radius-sm: calc(var(--radius) - 4px);
+	--radius-xl: calc(var(--radius) * 1.4);
+	--radius-2xl: calc(var(--radius) * 1.8);
+	--radius-3xl: calc(var(--radius) * 2.2);
+	--radius-4xl: calc(var(--radius) * 2.6);
+
+	--animate-accordion-down: accordion-down 0.2s ease-out;
+	--animate-accordion-up: accordion-up 0.2s ease-out;
+	--animate-collapsible-down: collapsible-down 0.25s ease-out;
+	--animate-collapsible-up: collapsible-up 0.25s ease-out;
+}
+
+:root {
+	color-scheme: dark;
+	--background: hsl(150 8% 5%);
+	--foreground: hsl(0 0% 95%);
+	--card: hsl(150 8% 6%);
+	--card-foreground: hsl(0 0% 95%);
+	--popover: hsl(150 8% 4%);
+	--popover-foreground: hsl(0 0% 95%);
+	--primary: hsl(96 57% 63%);
+	--primary-foreground: hsl(150 30% 12%);
+	--secondary: hsl(150 8% 7%);
+	--secondary-foreground: hsl(0 0% 95%);
+	--muted: hsl(150 8% 9%);
+	--muted-foreground: hsl(240 5% 64%);
+	--accent: hsl(95 63% 67%);
+	--accent-foreground: hsl(150 30% 12%);
+	--destructive: hsl(0 84% 60%);
+	--destructive-foreground: hsl(0 0% 100%);
+	--border: hsl(150 8% 12%);
+	--input: hsl(150 8% 12%);
+	--ring: hsl(96 57% 63%);
+	--hover-darken-color: black;
+	--radius: 0.75rem;
+}
+
+@keyframes accordion-down {
+	from {
+		height: 0;
+	}
+	to {
+		height: var(--radix-accordion-content-height);
+	}
+}
+
+@keyframes accordion-up {
+	from {
+		height: var(--radix-accordion-content-height);
+	}
+	to {
+		height: 0;
+	}
+}
+
+@keyframes collapsible-down {
+	from {
+		height: 0;
+	}
+	to {
+		height: var(--radix-collapsible-content-height);
+	}
+}
+
+@keyframes collapsible-up {
+	from {
+		height: var(--radix-collapsible-content-height);
+	}
+	to {
+		height: 0;
+	}
+}
+
+@keyframes infinite-scroll {
+	0% {
+		transform: translateX(0);
+	}
+	100% {
+		transform: translateX(-50%);
+	}
+}
+
+@keyframes pulse-glow {
+	0%,
+	100% {
+		opacity: 0.3;
+	}
+	50% {
+		opacity: 0.7;
+	}
+}
+
+@keyframes slide-up {
+	from {
+		transform: translateY(12px);
+	}
+	to {
+		transform: translateY(0);
+	}
+}
+
+@utility animate-slide-up {
+	animation: slide-up 0.6s ease-out both;
+}
+
+@utility motion-collapse {
+	display: grid;
+	grid-template-rows: 0fr;
+	opacity: 0;
+	transition:
+		grid-template-rows 0.25s ease-out,
+		opacity 0.25s ease-out;
+}
+
+@utility motion-collapse-open {
+	grid-template-rows: 1fr;
+	opacity: 1;
+}
+
+@utility motion-collapse-content {
+	min-height: 0;
+	overflow: hidden;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.animate-slide-up {
+		animation: none;
+		transform: none;
+	}
+
+	.motion-collapse,
+	.motion-collapse-open,
+	.motion-collapse-content {
+		transition: none;
+	}
+}
+
+@layer base {
+	@media (prefers-reduced-motion: no-preference) {
+		html {
+			scroll-behavior: smooth;
+		}
+	}
+
+	html {
+		@apply font-sans;
+	}
+
+	* {
+		font-optical-sizing: auto;
+		@apply border-border outline-ring/50;
+	}
+
+	body {
+		@apply bg-background text-foreground font-sans;
+		font-size: 1.125rem;
+		font-weight: 500;
+		font-optical-sizing: auto;
+		letter-spacing: 0.01em;
+	}
+
+	::-webkit-scrollbar {
+		width: 6px;
+	}
+
+	::-webkit-scrollbar-track {
+		background: var(--background);
+	}
+
+	::-webkit-scrollbar-thumb {
+		background: var(--border);
+		border-radius: 3px;
+	}
+
+	::-webkit-scrollbar-thumb:hover {
+		background: color-mix(in oklab, var(--primary), transparent 25%);
+	}
+}
+
+@utility glass {
+	border: 1px solid var(--border);
+	background-color: color-mix(in oklab, var(--card), transparent 50%);
+	backdrop-filter: blur(12px);
+}
+
+@utility gradient-text {
+	background: linear-gradient(to right, hsl(96, 57%, 58%), hsl(95, 63%, 67%));
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	background-clip: text;
+}
+
+@utility gradient-bg {
+	background: linear-gradient(135deg, hsl(96, 57%, 63%), hsl(95, 63%, 67%));
+}
+
+@utility on-hover {
+	transition: background-color 0.2s ease;
+	@variant hover {
+		background-color: color-mix(in oklab, var(--muted), var(--hover-darken-color) 3%);
+	}
+}
+
+@utility glow-orb {
+	position: absolute;
+	border-radius: 9999px;
+	filter: blur(120px);
+	pointer-events: none;
+}
+
+@utility animate-infinite-scroll {
+	animation: infinite-scroll 30s linear infinite;
+}
+
+@utility animate-pulse-glow {
+	animation: pulse-glow 4s ease-in-out infinite;
+}
+
+@utility scroll-paused {
+	animation-play-state: paused;
+}
+
+@utility scrollbar-hide {
+	-ms-overflow-style: none;
+	scrollbar-width: none;
+	&::-webkit-scrollbar {
+		display: none;
+	}
+}
